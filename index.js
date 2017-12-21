@@ -1,19 +1,6 @@
 'use strict'
 
-/*const UNALLOWED = [
-  ',',  ':',  '.', // , and : are sJSON seperators    . is web token seperator
-  "\n", "\t",      // common breaking control characters
-  "\"", "\\"       // these tend to break things so disallow
-]
-*/
 function allowed(str) {
-/*  console.log('=== allow', typeof str)
-  if (typeof str != 'string') return
-  for (let i in UNALLOWED) {
-    console.log('=== allow', i, JSON.stringify(UNALLOWED[i]))
-    if (str.indexOf(UNALLOWED[i]) >= 0) return
-  }
-  return true */
   return (typeof str == 'string' &&
     str.indexOf(',')  < 0 && str.indexOf(':')  < 0 &&  // , sJSON seperator        : sJSON seperators
     str.indexOf('.')  < 0 && str.indexOf('+')  < 0 &&  // . web token seperator    + sJSON space
@@ -74,10 +61,10 @@ function stringify(obj) {
 
 function parse(str) {
   if (typeof str == 'string' && str.substr(0,1) != '{' && str.substr(0,1) != '[' && str.indexOf('"') < 0 && str.indexOf(':') >= 0) { // if quick check shows is isn't JSON
-    let result = {}
-    let part   = str.split(',')
-    for (let i in part) {
-      let [ key, value ] = part[i].split(':')
+    var result = {}
+    var part   = str.split(',')
+    for (var i in part) {
+      var [ key, value ] = part[i].split(':')
 //      console.log('--- parse', key, value, typeof value, (value == '0' || parseFloat(value)))
       result[key] = (value == '0' || parseFloat(value)) ? parseFloat(value) : value.split('+').join(' ')
     }
