@@ -6,7 +6,7 @@ function allowed(str) {
     str.indexOf('.')  < 0 && str.indexOf('+')  < 0 &&  // . web token seperator    + sJSON space
     str.indexOf('?')  < 0 && str.indexOf('&')  < 0 &&  // ? url param              & url param
     str.indexOf('=')  < 0 && str.indexOf('#')  < 0 &&  // = url param              & url param
-    str.indexOf('%')  < 0 && str.indexOf('*')  < 0 &&  // % special encode param   * wildcard
+    str.indexOf('%')  < 0 &&                           // % special encode param
     str.indexOf('\\') < 0 && str.indexOf('`')  < 0 &&  // \ escape character       ` template
     str.indexOf("\n") < 0 && str.indexOf("\t") < 0 &&  // common breaking control characters
     str.indexOf("\"") < 0 && str.indexOf("\\") < 0     // these tend to break things so disallow
