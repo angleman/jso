@@ -22,9 +22,7 @@ sJSON.parse('hello:world')       // {hello: 'world'}
 ```
 
 Source Value | Stringify Value | Parse Value
---- | --- | ---
-true (boolean) | 1 (string) | 1 (truthy true)
-false (boolean) | 0 (string) | 0 (truthy false)
+--- | --- | ---false (boolean) | 0 (string) | 0 (truthy false)
 null (object) | 0 (string) | 0 (number)
 undefined (undefined) | 0 (string) | 0 (number)
 0 (number) | 0 (string) | 0 (number)
@@ -46,8 +44,12 @@ undefined (undefined) | 0 (string) | 0 (number)
 {"hi":"mom","luv":"you"} (object) | hi:mom,luv:you (string) | {"hi":"mom","luv":"you"} (object)
 {"i":"will","take":0} (object) | i:will (string) | {"i":"will"} (object)
 {"will":"this do"} (object) | will:this+do (string) | {"will":"this do"} (object)
+{"first":1,"second":1,"third":1} (object) | first:1,second,third (string) | {"first":1,"second":1,"third":1} (object)
+"hello:" (string) | "hello:" (string) | "hello:" (string)
+"hello:world" (string) | "hello:world" (string) | "hello:world" (string)
+{"400":400} (object) | 400:400 (string) | {"400":400} (object)
+{"100":1,"200":1,"300":1} (object) | 100:1,200,300 (string) | {"100":1,"200":1,"300":1} (object)
 
-While it may not look like much, every byte helps when you scale :-) In this example we get at 15% headstart on any addition compression we may want to do.
-
+While it may not look like much, every byte helps when you scale :-)
 
 ## License: MIT
