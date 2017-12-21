@@ -15,14 +15,15 @@ function allowed(str) {
 
 function stringify(obj) {
 //  console.log('****stringify', typeof obj, obj, typeof JSON.stringify(obj), JSON.stringify(obj))
-  let type = typeof obj
+  var type = typeof obj
   if (type == 'undefined') return '0'
   if (type == 'boolean')  return (obj) ? '1' : '0'
   if (type != 'object')   return JSON.stringify(obj) // no additional shrinking at this point
   if (!obj) return '0'
-  let result = ''
-  for (let i in obj) {
-    let val = obj[i]
+  var result = ''
+
+  for (var i in obj) {
+    var val = obj[i]
     var typ = typeof val
 //    console.log('---', i, typ, allowed(val), !!val, JSON.stringify(val))
     if (typ == 'string' && !allowed(val)) return JSON.stringify(obj) // unallowed character encountered
