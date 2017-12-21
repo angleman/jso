@@ -1,0 +1,30 @@
+{
+  "name": "jso",
+  "version": "1.0.0",
+  "description": "Short JSON strings. JSON API compatible with failover to JSON. Strips non truthy values if shortened.",
+   "main": "index.js",
+  "scripts": {
+    "test": "node ./test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/angleman/jso.git"
+  },
+  "keywords": [
+    "json",
+    "compression",
+    "compress",
+    "squish",
+    "parse",
+    "small",
+    "short"
+  ],
+  "author": "angleman",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/angleman/jso/issues"
+  },
+  "engines" : {
+    "node" : ">=0.8.0"
+  }
+}
