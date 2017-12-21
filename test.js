@@ -5,7 +5,7 @@ function IS(r,i){if(!r)throw Error(i)}IS.NT=function(r,i){if(r)throw Error(i)}; 
 
 var sJSON = require('./index')
 
-var debug = true
+var debug = false
 
 console.log('Source Value | Stringify Value | Parse Value')
 console.log('--- | --- | ---')
