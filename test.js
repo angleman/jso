@@ -1,8 +1,9 @@
 // test/main.js
 
+
 function IS(r,i){if(!r)throw Error(i)}IS.NT=function(r,i){if(r)throw Error(i)}; // https://github.com/yieme/IS
 
-var JSO = require('./index')
+var sJSON = require('./index')
 
 var debug = false
 
@@ -16,7 +17,7 @@ function test(obj, expectedValue, expectedDecode) {
   if (debug) console.log('obj           :', typeof obj, obj)
 
   if (undefined === expectedValue) expectedValue = JSON.stringify(obj)
-  var asString   = JSO.stringify(obj)
+  var asString   = sJSON.stringify(obj)
   if (debug) console.log('JSO.stringify :', typeof asString, asString)
   if (debug) console.log('expectedValue :', typeof expectedValue, expectedValue)
   IS(asString == expectedValue, 'Expected encode ' + expectedValue)
@@ -27,7 +28,7 @@ function test(obj, expectedValue, expectedDecode) {
   }
 
   if (undefined === expectedDecode) expectedDecode = obj
-  var asObj      = JSO.parse(asString)
+  var asObj      = sJSON.parse(asString)
   if (debug) console.log('JSO.parse     :', typeof asObj, asObj)
   if (debug) console.log('expectedDecode:', typeof expectedDecode, expectedDecode)
 
