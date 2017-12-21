@@ -1,22 +1,24 @@
-# jso
+# sjn
 
-Short JSON strings. JSON API compatible with failover to JSON. Strips non truthy values if shortened
+Short JSON strings. JSON API compatible with failover to JSON. Strips falsy values. Only shortens flat objects.
 
-NodeJS global override: `global.JSON = require('jso')`
+NodeJS global override: `global.JSON = require('sjn')`
 
 
 
 ## Install
 
 ```
-npm install jso
+npm install sjn
 ```
 
 ## Usage
 
 ```javascript
-var jso = require('jso');
+var sJSON = require('sjn');
 
+sJSON.stringify({hello:'world'}) // hello:world
+sJSON.parse('hello:world')       // {hello: 'world'}
 ```
 
 Source Value | Stringify Value | Parse Value

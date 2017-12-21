@@ -1,6 +1,6 @@
 {
-  "name": "jso",
-  "version": "1.0.0",
+  "name": "sjn",
+  "version": "1.0.1",
   "description": "Short JSON strings. JSON API compatible with failover to JSON. Strips non truthy values if shortened.",
    "main": "index.js",
   "scripts": {
