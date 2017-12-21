@@ -1,11 +1,11 @@
 // test/main.js
 
 
-function IS(r,i){if(!r)throw Error(i)}IS.NT=function(r,i){if(r)throw Error(i)}; // https://github.com/yieme/IS
+function IS(r,i){if(!r)throw Error(i)}IS.NT=function(r,i){if(r)throw Error(i)}; // https://github.com/yieme/IS test harness
 
 var sJSON = require('./index')
 
-var debug = false
+var debug = true
 
 console.log('Source Value | Stringify Value | Parse Value')
 console.log('--- | --- | ---')
@@ -14,12 +14,12 @@ function test(obj, expectedValue, expectedDecode) {
   var boolObj = typeof obj == 'boolean'
   var lin = JSON.stringify(obj) + ' (' + typeof obj + ')'
   if (debug) console.log('')
-  if (debug) console.log('obj           :', typeof obj, obj)
+  if (debug) console.log('obj            :', typeof obj, obj)
 
   if (undefined === expectedValue) expectedValue = JSON.stringify(obj)
   var asString   = sJSON.stringify(obj)
-  if (debug) console.log('JSO.stringify :', typeof asString, asString)
-  if (debug) console.log('expectedValue :', typeof expectedValue, expectedValue)
+  if (debug) console.log('sJSON.stringify:', typeof asString, asString)
+  if (debug) console.log('expectedValue  :', typeof expectedValue, expectedValue)
   IS(asString == expectedValue, 'Expected encode ' + expectedValue)
   if (typeof expectedValue == 'object') {
     lin += ' | ' + JSON.stringify(expectedValue) + ' (' + typeof expectedValue + ')'
@@ -29,8 +29,8 @@ function test(obj, expectedValue, expectedDecode) {
 
   if (undefined === expectedDecode) expectedDecode = obj
   var asObj      = sJSON.parse(asString)
-  if (debug) console.log('JSO.parse     :', typeof asObj, asObj)
-  if (debug) console.log('expectedDecode:', typeof expectedDecode, expectedDecode)
+  if (debug) console.log('sJSON.parse    :', typeof asObj, asObj)
+  if (debug) console.log('expectedDecode :', typeof expectedDecode, expectedDecode)
 
   IS(typeof asObj == typeof expectedDecode, 'Expected decode type ' + expectedDecode)
   var compareJson  = JSON.stringify(expectedDecode)
@@ -65,4 +65,8 @@ test({not_defined:undefined}, '{}', {})
 test({hi:"mom", luv:"you"}, 'hi:mom,luv:you')
 test({i:'will',take:0}, 'i:will', {i:'will'})
 test({will:"this do"}, 'will:this+do')
+test({"first":1,"second":1,"third":1}, 'first:1,second,third')
+test("hello:")
+test("hello:world")
 test({"400":400}, "400:400")
+test({"100":1,"200":1,"300":1}, "100:1,200,300")

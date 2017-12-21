@@ -14,47 +14,36 @@ function allowed(str) {
 }
 
 function stringify(obj) {
-//  console.log('****stringify', typeof obj, obj, typeof JSON.stringify(obj), JSON.stringify(obj))
   var type = typeof obj
   if (type == 'undefined') return '0'
   if (type == 'boolean')  return (obj) ? '1' : '0'
   if (type != 'object')   return JSON.stringify(obj) // no additional shrinking at this point
   if (!obj) return '0'
   var result = ''
-
+  var addColon = true
   for (var i in obj) {
     var val = obj[i]
     var typ = typeof val
-//    console.log('---', i, typ, allowed(val), !!val, JSON.stringify(val))
     if (typ == 'string' && !allowed(val)) return JSON.stringify(obj) // unallowed character encountered
-//    console.log('--- 2')
     if (!!val && JSON.stringify(val) != 'null') { // only encode truthy values
       if (result.length) result += ','
-//      console.log('--- 3')
       switch (typ) {
         case 'boolean':
-//        console.log('*boo', i, typeof val, val)
-          result += i + ':1'
+          result += i + ((addColon) ? ':1' : '')
           break
         case 'string' :
-//          console.log('*str', i, typeof val, val)
           if (typ == 'string' && !allowed(val)) return JSON.stringify(obj)
           result += i + ':' + val.split(' ').join('+')
           break
         case 'number':
-//          console.log('*num', i, typeof val, val)
-          result += i + ':' + val
+          result += i + ((addColon || val != 1) ? ':' + val : '')
           break
         default:
-//          console.log('*def', i, typeof val, val, "*** break")
           return JSON.stringify(obj)
       }
-//      console.log('- - switch', typ)
-//    } else {
-//      console.log('- - skip', i, JSON.stringify(val))
+      addColon = false
     }
   }
-//  console.log('- - done', result)
   return (result) ? result : '{}'
 }
 
@@ -66,7 +55,7 @@ function parse(str) {
     var part   = str.split(',')
     for (var i in part) {
       var [ key, value ] = part[i].split(':')
-//      console.log('--- parse', key, value, typeof value, (value == '0' || parseFloat(value)))
+      if (value === undefined) value = 1
       result[key] = (value == '0' || parseFloat(value)) ? parseFloat(value) : value.split('+').join(' ')
     }
     return result
