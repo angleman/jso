@@ -2,9 +2,6 @@
 
 Short JSON strings. JSON API compatible with failover to JSON. Strips falsy values. Only shortens flat objects.
 
-NodeJS global override: `global.JSON = require('sjn')`
-
-
 
 ## Install
 

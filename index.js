@@ -1,7 +1,5 @@
 'use strict'
 
-const gJSON = this.JSON // hold onto global JSON just in case it is overwritten
-
 function allowed(str) {
   return (typeof str == 'string' &&
     str.indexOf(',')  < 0 && str.indexOf(':')  < 0 &&  // , sJSON seperator        : sJSON seperators
@@ -19,29 +17,29 @@ function stringify(obj) {
   var type = typeof obj
   if (type == 'undefined') return '0'
   if (type == 'boolean')  return (obj) ? '1' : '0'
-  if (type != 'object')   return gJSON.stringify(obj) // no additional shrinking at this point
+  if (type != 'object')   return JSON.stringify(obj) // no additional shrinking at this point
   if (!obj) return '0'
   var result = ''
   var addColon = true
   for (var i in obj) {
     var val = obj[i]
     var typ = typeof val
-    if (typ == 'string' && !allowed(val)) return gJSON.stringify(obj) // unallowed character encountered
-    if (!!val && gJSON.stringify(val) != 'null') { // only encode truthy values
+    if (typ == 'string' && !allowed(val)) return JSON.stringify(obj) // unallowed character encountered
+    if (!!val && JSON.stringify(val) != 'null') { // only encode truthy values
       if (result.length) result += ','
       switch (typ) {
         case 'boolean':
           result += i + ((addColon) ? ':1' : '')
           break
         case 'string' :
-          if (typ == 'string' && !allowed(val)) return gJSON.stringify(obj)
+          if (typ == 'string' && !allowed(val)) return JSON.stringify(obj)
           result += i + ':' + val.split(' ').join('+')
           break
         case 'number':
           result += i + ((addColon || val != 1) ? ':' + val : '')
           break
         default:
-          return gJSON.stringify(obj)
+          return JSON.stringify(obj)
       }
       addColon = false
     }
@@ -63,7 +61,7 @@ function parse(str) {
     return result
   }
   try {
-    return gJSON.parse(str)
+    return JSON.parse(str)
   } catch(e) {
     return str
   }
