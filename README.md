@@ -19,7 +19,8 @@ sJSON.parse('hello:world')       // {hello: 'world'}
 ```
 
 Source Value | Stringify Value | Parse Value
---- | --- | ---false (boolean) | 0 (string) | 0 (truthy false)
+--- | --- | ---
+false (boolean) | 0 (string) | 0 (truthy false)
 null (object) | 0 (string) | 0 (number)
 undefined (undefined) | 0 (string) | 0 (number)
 0 (number) | 0 (string) | 0 (number)
